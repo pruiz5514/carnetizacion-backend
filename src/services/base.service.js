@@ -32,6 +32,14 @@ class BaseService {
         return {message: 'Record deleted succesfully'}
     }
 
+    async checkIfExist(field, value, message){
+        const existing = await this.model.findOne({where: {[field]: value}})
+
+        if (existing) {
+            throw new ValidationError(message);
+        }
+    }
+
 
 }
 

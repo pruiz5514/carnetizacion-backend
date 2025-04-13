@@ -14,7 +14,8 @@ export const Establishments = sequelize.define('establishments', {
     },
     phone_number:{
         allowNull:false,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        unique: true
     },
     email: {
         allowNull: false,

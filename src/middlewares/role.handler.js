@@ -11,7 +11,7 @@ const roleHandler = (req, res, next) =>{
 
     try{
         const decoded = jwt.verify(token, process.env.JWT_KEY)
-        if(decoded.role === 1){
+        if(decoded.role_id === 1){
             req.user = decoded
             next()
         }else{

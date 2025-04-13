@@ -30,7 +30,7 @@ class AuthService extends BaseService{
             {
               exp: Math.floor(Date.now() / 1000) + 60 * 60 * 2, 
               id: user.id,
-              role_id: user.role
+              role_id: user.role.id
             }, process.env.JWT_KEY);
         
         return {user, token}    
