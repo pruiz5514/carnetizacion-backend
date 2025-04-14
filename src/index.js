@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { sequelize } from './database/sequelize.js';
 import { routerApi } from './routes/index.js';
 
@@ -9,6 +10,8 @@ const app = express()
 const PORT  = process.env.PORT || 3000;
 
 app.use(express.json());
+
+app.use(cors());
 
 routerApi(app);
 

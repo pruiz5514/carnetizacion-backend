@@ -24,3 +24,13 @@ export const findAllStudentsController = async (req, res, next) => {
         next(error);
     }
 }
+
+export const findStudentByIdController = async (req, res, next) => {
+    try{
+        const {id} = req.params
+        const student = await service.findOne(id);
+        return res.status(200).json({student})
+    }catch (error) {
+        next(error);
+    }
+}
