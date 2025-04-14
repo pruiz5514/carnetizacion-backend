@@ -14,7 +14,7 @@ export const createEstablishmentController = async(req, res, next)=>{
         })
     }catch (error) {
         next(error);
-      }
+    }
 }
 
 export const findAllEstablishmentsController = async(req, res, next)=>{

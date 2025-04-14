@@ -1,3 +1,5 @@
+import { ValidationError } from "sequelize";
+
 class BaseService {
     constructor(model){
         this.model = model

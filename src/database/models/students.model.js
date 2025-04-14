@@ -21,7 +21,8 @@ export const Students = sequelize.define('students', {
     },
     qr_code: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
     },
     active:{
         allowNull: false,
