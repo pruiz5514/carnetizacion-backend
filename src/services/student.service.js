@@ -12,6 +12,13 @@ class StudentsService extends BaseService{
 
         return super.create(data)
     }
+    async findStudentByQrCode(id){
+        const student = await this.model.findOne({ where: { qr_code: id } });
+        if (!student) {
+            throw new Error(`No se encontró ningún estudiante con ${attribute}: ${value}`);
+        }
+        return student; 
+    }
 }
 
 export default StudentsService

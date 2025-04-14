@@ -7,13 +7,11 @@ const router = express.Router();
 
 router.post('/',
     tokenHandler,
-    roleHandler,
     createScanController
 );
 
 router.get('/',
     tokenHandler,
-    roleHandler,
     findAllScansController
 )
 

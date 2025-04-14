@@ -1,6 +1,6 @@
 import express from 'express';
 import { studentsSchema } from '../schemas/students.schema.js';
-import { createStudentController, findAllStudentsController, findStudentByIdController } from '../controllers/student.controller.js';
+import { createStudentController, findAllStudentsController, findStudentByQRController } from '../controllers/student.controller.js';
 import tokenHandler from '../middlewares/token.handler.js';
 import validatorHandler from '../middlewares/validator.handler.js';
 import roleHandler from '../middlewares/role.handler.js';
@@ -22,7 +22,7 @@ router.get('/',
 
 router.get('/:id',
     tokenHandler,
-    findStudentByIdController
+    findStudentByQRController
 )
 
 export default router
