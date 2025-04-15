@@ -17,6 +17,7 @@ export const createEstablishmentController = async(req, res, next)=>{
     }
 }
 
+
 export const findAllEstablishmentsController = async(req, res, next)=>{
     try{
         const establishments = await service.findAll();
@@ -26,15 +27,41 @@ export const findAllEstablishmentsController = async(req, res, next)=>{
     }
 }
 
+export const findEstablishmentByIdController = async(req, res, next) => {
+    try{
+        const {id} = req.params
+        const establishment = await service.findOne(id);
+        const { password, ...establishmentWithoutPassword } = establishment.toJSON();
+        return res.status(200).json(establishmentWithoutPassword)
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const updateEstablishmentController = async(req, res, next)=>{
     try{
         const {id} = req.params
         const body = req.body;
-        const updatedEstablishment = await service.update(id, body)
+        const updatedEstablishment = await service.update(id,body)
+
+        const { password, createdAt, ...establishmentWithoutPassword } = updatedEstablishment.toJSON()
 
         return res.status(200).json({
             message:'Establecimiento actualizado exitosamente',
-            establishment: updatedEstablishment
+            establishment: establishmentWithoutPassword
+        })
+    }catch (error) {
+        next(error);
+    }
+}
+
+export const deleteEstablishmentController = async(req, res, next)=>{
+    try{
+        const {id} = req.params
+        const updatedEstablishment = await service.delete(id)
+
+        return res.status(200).json({
+            message:'Establecimiento eliminado exitosamente',
         })
     }catch (error) {
         next(error);
