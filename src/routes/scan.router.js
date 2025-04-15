@@ -1,7 +1,6 @@
 import express from 'express';
 import tokenHandler from '../middlewares/token.handler.js';
-import roleHandler from '../middlewares/role.handler.js';
-import {createScanController, findAllScansController} from '../controllers/scan.controller.js'
+import {createScanController, findAllScansByEstablishmentController, findAllScansController} from '../controllers/scan.controller.js'
 
 const router = express.Router();
 
@@ -13,6 +12,11 @@ router.post('/',
 router.get('/',
     tokenHandler,
     findAllScansController
+)
+
+router.get('/establishment/:id',
+    tokenHandler,
+    findAllScansByEstablishmentController
 )
 
 export default router
