@@ -25,3 +25,18 @@ export const findAllEstablishmentsController = async(req, res, next)=>{
         next(error);
     }
 }
+
+export const updateEstablishmentController = async(req, res, next)=>{
+    try{
+        const {id} = req.params
+        const body = req.body;
+        const updatedEstablishment = await service.update(id, body)
+
+        return res.status(200).json({
+            message:'Establecimiento actualizado exitosamente',
+            establishment: updatedEstablishment
+        })
+    }catch (error) {
+        next(error);
+    }
+}

@@ -19,3 +19,12 @@ export const establishmentSchema = Joi.object({
             otherwise: Joi.optional()
         }),
 })
+
+export const establishmentUpdateSchema = Joi.object({
+    fullname: Joi.string().required().min(3),
+    phone_number: Joi.number().integer().required().min(100000000).max(999999999),
+    email: Joi.string().email().required(),
+    establishment_name: Joi.string().min(3).required(),
+    establishment_address: Joi.string().min(3).required(),
+})
+

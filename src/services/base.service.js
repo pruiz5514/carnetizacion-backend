@@ -18,10 +18,11 @@ class BaseService {
     }
 
     async update(id, data){
-        const record = await this.findOne(id);
+        const record = await this.model.findByPk(id);
         if(!record){
             throw new Error('Record not found')
         }
+        
         return await record.update(data)
     }
 

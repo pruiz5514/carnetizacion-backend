@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Establishments } from "../database/models/establishments.model.js";
 import BaseService from "./base.service.js";
 import bcrypt from 'bcrypt'
@@ -26,9 +27,34 @@ class EstablishmentsService extends BaseService{
         });
 
         return establishments
-    }    
-
+    }  
     
+    async checkIfExistUpdate(field, value, message, id) {
+        const where = {
+            [field]: value,
+            id: { [Op.ne]: id } 
+        };
+
+        const existing = await this.model.findOne({ where });
+
+        if (existing) {
+            throw new Error(message);
+        }
+    }
+
+    async update(id,data) {
+    
+        const {password, role_id, ...rest } = data;
+      
+        await this.checkIfExistUpdate('phone_number', data.phone_number, 'El número de teléfono ya está registrado');
+        await this.checkIfExistUpdate('email', data.email, 'El correo electrónico ya está registrado');
+      
+        if (role_id === 2) {
+          await this.checkIfExistUpdate('establishment_name', data.establishment_name, 'El establecimiento ya está registrado');
+        }
+      
+        return super.update(id, rest);
+      }
 }
 
 export default EstablishmentsService
