@@ -19,6 +19,26 @@ class StudentsService extends BaseService{
         }
         return student; 
     }
+
+    async updateStudent(id, data) {
+        const student = await this.findOne(id); 
+    
+        if (!student) {
+            throw new Error('Estudiante no encontrado');
+        }
+    
+        if (data.email && data.email !== student.email) {
+            await this.checkIfExist('email', data.email, 'El correo electrónico ya está registrado');
+        }
+    
+        if (data.qr_code && data.qr_code !== student.qr_code) {
+            await this.checkIfExist('qr_code', data.qr_code, 'El código ya está registrado');
+        }
+    
+        await super.update(id, data)
+    
+        return student;
+    }
 }
 
 export default StudentsService

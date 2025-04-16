@@ -1,6 +1,6 @@
 import express from 'express';
 import { studentsSchema } from '../schemas/students.schema.js';
-import { createStudentController, findAllStudentsController, findStudentByQRController } from '../controllers/student.controller.js';
+import { createStudentController, deleteStudentController, findAllStudentsController, findStudentByIdController, findStudentByQRController, updateStudentController } from '../controllers/student.controller.js';
 import tokenHandler from '../middlewares/token.handler.js';
 import validatorHandler from '../middlewares/validator.handler.js';
 import roleHandler from '../middlewares/role.handler.js';
@@ -23,6 +23,24 @@ router.get('/',
 router.get('/:id',
     tokenHandler,
     findStudentByQRController
+)
+
+router.delete('/:id',
+    tokenHandler, 
+    roleHandler,
+    deleteStudentController
+)
+
+router.put('/:id',
+    tokenHandler, 
+    roleHandler,
+    updateStudentController
+)
+
+router.get('/id/:id',
+    tokenHandler,
+    roleHandler,
+    findStudentByIdController
 )
 
 export default router

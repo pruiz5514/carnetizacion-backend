@@ -58,7 +58,7 @@ export const updateEstablishmentController = async(req, res, next)=>{
 export const deleteEstablishmentController = async(req, res, next)=>{
     try{
         const {id} = req.params
-        const updatedEstablishment = await service.delete(id)
+        await service.delete(id)
 
         return res.status(200).json({
             message:'Establecimiento eliminado exitosamente',
