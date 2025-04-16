@@ -33,3 +33,13 @@ export const findAllScansByEstablishmentController = async(req, res, next) =>{
         next(error);
     }
 }
+
+export const findAllScansByStudentController = async(req, res, next) =>{
+    try{
+        const {id} = req.params
+        const scans = await service.findByStudent(id);
+        return res.status(200).json(scans)
+    }catch (error) {
+        next(error);
+    }
+}

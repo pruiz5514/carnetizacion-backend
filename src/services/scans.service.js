@@ -66,6 +66,26 @@ class ScanService extends BaseService{
         })
         return scans
     }
+
+    async findByStudent(id){
+        const scans = await this.model.findAll({
+            where: {student_id: id},
+            attributes: { exclude: ['establishment_id'] },
+            include: [
+                {
+                    model: Establishments,
+                    attributes: { exclude: ['password', 'id', 'role_id']},
+                    as: 'establishment',
+                },
+                {
+                    model: Students,
+                    as: 'student',
+                    attributes: ['fullname']  
+                }
+            ]
+        })
+        return scans
+    }
 } 
 
 

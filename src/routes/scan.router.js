@@ -1,6 +1,7 @@
 import express from 'express';
 import tokenHandler from '../middlewares/token.handler.js';
-import {createScanController, findAllScansByEstablishmentController, findAllScansController} from '../controllers/scan.controller.js'
+import {createScanController, findAllScansByEstablishmentController, findAllScansByStudentController, findAllScansController} from '../controllers/scan.controller.js'
+import roleHandler from '../middlewares/role.handler.js';
 
 const router = express.Router();
 
@@ -18,5 +19,12 @@ router.get('/establishment/:id',
     tokenHandler,
     findAllScansByEstablishmentController
 )
+
+router.get('/student/:id',
+    tokenHandler,
+    roleHandler,
+    findAllScansByStudentController
+)
+
 
 export default router
