@@ -76,11 +76,6 @@ class ScanService extends BaseService{
                     model: Establishments,
                     attributes: { exclude: ['password', 'id', 'role_id']},
                     as: 'establishment',
-                },
-                {
-                    model: Students,
-                    as: 'student',
-                    attributes: ['fullname']  
                 }
             ]
         })
